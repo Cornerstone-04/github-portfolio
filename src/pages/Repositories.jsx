@@ -25,7 +25,7 @@ const Repositories = () => {
         {repos &&
           repos.map((repo) => (
             <p key={repo.id} className="capitalize">
-              <Link  to={`/repository/${repo.name}`} target="_blank">
+              <Link to={`/repositories/${repo.name}`} target="_blank">
                 {repo.name}
               </Link>
             </p>

@@ -1,1 +1,2 @@
-export { Arrow } from "./arrow-left.svg";
+import Arrow from "./arrow-left.svg";
+export { Arrow };

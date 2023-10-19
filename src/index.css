@@ -10,4 +10,13 @@
 
 body {
   font-family: "Clash Display", sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  min-height: 100vh;
+  @apply bg-dark
+}
+
+a{
+  outline: none;
 }

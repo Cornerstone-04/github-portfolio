@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "../api/axios";
 import { Link } from "react-router-dom";
+import Layout from "../layout/Layout";
 
 const Repositories = () => {
   const [repos, setRepos] = useState([]);
@@ -19,7 +20,7 @@ const Repositories = () => {
   });
 
   return (
-    <div>
+    <Layout>
       <h1>Cornerstone&apos;s Repos Repositories</h1>
       <div>
         {repos &&
@@ -31,7 +32,7 @@ const Repositories = () => {
             </p>
           ))}
       </div>
-    </div>
+    </Layout>
   );
 };
 

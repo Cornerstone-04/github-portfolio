@@ -2,7 +2,7 @@ import AppRoutes from "./Routes"
 
 const App = () => {
   return (
-    <div>
+    <div className="bg-dark min-h-screen text-white relative">
       <AppRoutes/>
     </div>
   )

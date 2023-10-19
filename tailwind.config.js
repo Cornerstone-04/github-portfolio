@@ -12,6 +12,9 @@ export default {
         text: "#DDDDDD",
         link: "#2622FF",
       },
+      backgroundImage: {
+        author: "url('./src/assets/images/Cornerstone.jpg')",
+      },
     },
   },
   plugins: [],

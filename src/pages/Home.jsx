@@ -1,7 +1,33 @@
-import { HeadImage } from "../components";
+import { useEffect, useState } from "react";
+import { HeadImage, Loader } from "../components";
 import Layout from "../layout/Layout";
+// import Loader from "../components/Loader";
 
 const Home = () => {
+  const [loading, setLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    if (loading) {
+      const interval = setInterval(() => {
+        setProgress((prev) => {
+          if (prev >= 100) {
+            clearInterval(interval);
+            setLoading(false);
+            return 100;
+          }
+          return prev + 25;
+        });
+      }, 500);
+
+      return () => clearInterval(interval);
+    }
+  }, [loading]);
+
+  if (loading) {
+    return <Loader progress={progress} />;
+  }
+
   return (
     <Layout>
       <main className="px-[1.5rem] md:px-[3.5rem] my-[4rem] md:my-[6rem] grid gap-8 md:gap-16">

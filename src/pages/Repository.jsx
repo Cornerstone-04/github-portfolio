@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "../api/axios";
 import Layout from "../layout/Layout";
+import { Loader } from "../components";
 
 const Repository = () => {
   const [repo, setRepo] = useState(null);
+  const [loading, setLoading] = useState(true);
   const { repoName } = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRepo = async () => {
@@ -19,16 +21,21 @@ const Repository = () => {
     };
 
     fetchRepo();
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
   }, [repoName]);
 
-  if (!repo) return <p>Loading...</p>;
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <Layout>
       <main>
-       <h1>{repo.name}</h1>
-      <p>Description: {repo.description}</p>
-      <img src={repo.html_url} alt="" />
+        <h1>{repo.name}</h1>
+        <p>Description: {repo.description}</p>
+        <img src={repo.html_url} alt="" />
       </main>
     </Layout>
   );

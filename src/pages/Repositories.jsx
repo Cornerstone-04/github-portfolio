@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "../api/axios";
 import Layout from "../layout/Layout";
-import { RepoCard } from "../components";
+import { Loader, RepoCard } from "../components";
 import Slider from "react-slick";
 import { settings } from "../data/carouselSettings";
 import { NavArrow } from "../assets/icons";
@@ -10,6 +10,8 @@ import { GithubLogo } from "../assets/images";
 const Repositories = () => {
   const sliderRef = useRef(null);
   const [repos, setRepos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
 
   const fetchRepos = async () => {
     try {
@@ -22,7 +24,26 @@ const Repositories = () => {
 
   useEffect(() => {
     fetchRepos();
-  });
+
+    if (loading) {
+      const interval = setInterval(() => {
+        setProgress((prev) => {
+          if (prev >= 100) {
+            clearInterval(interval);
+            setLoading(false);
+            return 100;
+          }
+          return prev + 25;
+        });
+      }, 500);
+
+      return () => clearInterval(interval);
+    }
+  }, [loading]);
+
+  if (loading) {
+    return <Loader progress={progress} />;
+  }
 
   const goToNextSlide = () => {
     if (sliderRef.current) {

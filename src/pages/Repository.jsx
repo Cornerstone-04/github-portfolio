@@ -76,7 +76,7 @@ const Repository = () => {
               Owner: {repo.owner.login}
             </p>
           </div>
-          <div className="text-base md:text-[1.75rem] md:text-justify font-light text-text flex flex-col gap-1">
+          <div className="text-base md:text-[1.75rem] font-light text-text flex flex-col gap-2">
             <p>
               Description: &nbsp;
               {repo.description ? repo.description : "No description"}

@@ -11,7 +11,8 @@ export default {
         dark: "#181818",
         text: "#DDDDDD",
         link: "#2622FF",
-        btn: "#030081"
+        btn: "#030081",
+        "btn-hover": "#171495"
       },
       backgroundImage: {
         author: "url('./src/assets/images/Cornerstone.jpg')",

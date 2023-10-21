@@ -1,11 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import {
-  ErrorBoundary,
-  Home,
-  NotFound,
-  Repositories,
-  Repository,
-} from "./pages";
+import { Home, NotFound, Repositories, Repository } from "./pages";
+import ErrorBoundary from "./error/ErrorBoundary";
+
 const AppRoutes = () => {
   return (
     <Router>

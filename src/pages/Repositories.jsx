@@ -5,6 +5,7 @@ import { RepoCard } from "../components";
 import Slider from "react-slick";
 import { settings } from "../data/carouselSettings";
 import { NavArrow } from "../assets/icons";
+import { GithubLogo } from "../assets/images";
 
 const Repositories = () => {
   const sliderRef = useRef(null);
@@ -49,9 +50,9 @@ const Repositories = () => {
                   key={repo.id}
                   name={repo.name}
                   link={`/repositories/${repo.name}`}
-                  img="https://picsum.photos/200"
+                  img={GithubLogo}
                   desc={repo.description ? repo.description : "No description"}
-                  watch={repo.watchers_count}
+                  // watch={repo}
                 />
               ))}
           </Slider>

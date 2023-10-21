@@ -1,2 +1,5 @@
 import Cornerstone from "./Cornerstone.jpg";
-export { Cornerstone };
+import GithubLogo from "./gh-logo.png";
+import Noise from "./noise.png";
+
+export { Cornerstone, GithubLogo, Noise };

@@ -5,10 +5,10 @@ const Header = () => {
   const splitLocation = pathname.split("/");
 
   return (
-    <header className="w-full flex justify-between items-center px-[3.5rem] pt-[3.5rem]">
-      <h1 className="uppercase font-extrabold text-2xl">RepoView</h1>
+    <header className="w-full flex justify-between items-center px-6 md:px-[3.5rem] pt-6 md:pt-[3.5rem]">
+      <h1 className="uppercase font-extrabold text-lg md:text-2xl">Repo&#8208;View</h1>
       <nav>
-        <ul className="flex gap-[3.5rem]">
+        <ul className="flex gap-4 md:gap-[3.5rem] text-lg md:text-2xl">
           <li>
             <Link
               to="/"

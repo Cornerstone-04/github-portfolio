@@ -11,9 +11,11 @@ export default {
         dark: "#181818",
         text: "#DDDDDD",
         link: "#2622FF",
+        btn: "#030081"
       },
       backgroundImage: {
         author: "url('./src/assets/images/Cornerstone.jpg')",
+        noise: "url('./src/assets/images/noise.jpg')"
       },
     },
   },

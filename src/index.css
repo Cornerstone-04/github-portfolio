@@ -8,15 +8,20 @@
     url("./assets/fonts/ClashDisplay-Regular.otf") format("opentype");
 }
 
+html,
 body {
-  font-family: "Clash Display", sans-serif;
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  min-height: 100vh;
-  @apply bg-dark
+  @apply bg-dark w-full box-border min-h-screen m-0 p-0 font-clash bg-fixed;
+  background-image: url("./assets/images/noise.png");
 }
 
-a{
+a {
   outline: none;
+  @apply hover:text-white transition-all ease-linear;
+}
+
+#bent_text span {
+  position: absolute;
+  left: 50%;
+  transform-origin: 0 85px;
+  font-size: 1.25rem;
 }

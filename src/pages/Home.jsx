@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { HeadImage, Loader } from "../components";
 import Layout from "../layout/Layout";
 import { useForm, ValidationError } from "@formspree/react";
+// import { Link } from "react-router-dom";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -30,15 +31,16 @@ const Home = () => {
     return <Loader progress={progress} />;
   }
 
-  if (state.succeeded) {
-    return (
-      <Layout>
-        <main className="px-[1.5rem] md:px-[3.5rem] my-[4rem] md:my-[6rem] w-full h-full flex justify-center items-center">
-          <p className="font-[300] text-4xl md:text-[5rem]">Message sent!</p>
-        </main>
-      </Layout>
-    );
-  }
+  // if (state.succeeded) {
+  //   return (
+  //     <Layout>
+  //       <main className="px-[1.5rem] md:px-[3.5rem] my-[4rem] md:my-[6rem] w-full h-full flex justify-center items-center">
+  //         <p className="font-[300] text-4xl md:text-[5rem]">Message sent!</p>
+  //         <Link to ="/">Return home</Link>
+  //       </main>
+  //     </Layout>
+  //   );
+  // }
 
   return (
     <Layout>

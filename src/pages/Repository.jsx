@@ -86,20 +86,14 @@ const Repository = () => {
             <p>Stars: &nbsp;{repo.stargazers_count}</p>
             <p>Created: &nbsp;{repo.created_at.replace(/-/g, " ")}</p>
             <p>Updated: &nbsp;{repo.updated_at.replace(/-/g, " ")}</p>
-            <p>Forked: {repo.fork ? "Yes" : "No"}</p>
+            <p>Forked Repo: {repo.fork ? "Yes" : "No"}</p>
             <p>Forks: &nbsp;{repo.forks}</p>
             <p>Size: {(repo.size / 1024).toFixed(2)} KBs</p>
             <p>Language: &nbsp;{repo.language}</p>
             <p>Open Issues: &nbsp;{repo.open_issues}</p>
             <p>Watchers: &nbsp;{repo.watchers}</p>
-            <ul className="flex">
-              <span>Topic:&nbsp;</span>
-              {repo.topics && repo.topics.map((topic,id)=>(
-                <li key={id}>{topic}&nbsp;</li>
-              ))}
-            </ul>
             <p>
-              Github-link: &nbsp;
+              Github: &nbsp;
               <Link
                 to={repo.html_url}
                 className="text-link hover:text-btn-hover"
@@ -108,7 +102,7 @@ const Repository = () => {
               </Link>
             </p>
             <p>
-              Preview Link: &nbsp;
+              Preview: &nbsp;
               <Link
                 to={repo.homepage && repo.homepage}
                 className="text-link hover:text-btn-hover"

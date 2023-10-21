@@ -10,13 +10,10 @@ const RepoCard = ({ key, link, img, name, desc, watch }) => {
     <Link
       key={key}
       to={link}
-      className="flex flex-col gap-4 w-full sm:max-w-[18rem] mb-12"
+      className="flex flex-col gap-2 w-full sm:max-w-[18rem] mb-12"
     >
       <img src={img} alt="" className="h-[18rem] w-full" />
-      <div className="w-full flex justify-between items-end">
-        <h2 className="text-lg md:text-2xl font-medium capitalize">{name}</h2>
-        <div>Stars</div>
-      </div>
+      <h2 className="text-lg md:text-2xl font-medium capitalize">{name}</h2>
       <p className="text-base overflow-ellipsis text-text">{desc}</p>
       <p className="text-[#D3D3D3] font-medium text-base">
         {watch}&nbsp;watcher(s)

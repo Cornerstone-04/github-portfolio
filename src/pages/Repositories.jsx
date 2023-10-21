@@ -15,7 +15,7 @@ const Repositories = () => {
 
   const fetchRepos = async () => {
     try {
-      const response = await axios.get("/users/Cornerstone-04/repos");
+      const response = await axios.get("/users/Cornerstone-04/repos?per_page=100");
       setRepos(response.data);
     } catch (error) {
       console.log(error);
@@ -73,7 +73,7 @@ const Repositories = () => {
                   link={`/repositories/${repo.name}`}
                   img={GithubLogo}
                   desc={repo.description ? repo.description : "No description"}
-                  // watch={repo}
+                  watch={repo.watchers_count}
                 />
               ))}
           </Slider>

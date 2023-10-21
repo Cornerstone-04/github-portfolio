@@ -1,5 +1,29 @@
 <div id="top"></div>
 
+# Introduction
+
+<header>
+        <h2>My GitHub Portfolio App</h2>
+        <p>Welcome to My GitHub Portfolio App! This application showcases my GitHub repositories in a sleek web interface. Whether you're a recruiter or a fellow developer, you can easily navigate through my projects, view detailed information, and even check out the source code.</p>
+</header>
+
+<section>
+        <h2>Features</h2>
+        <ol>
+            <li><strong>Repository List:</strong> View a list of all my public repositories on GitHub. Click on a repository to see detailed information about that project.</li>
+            <li><strong>Repository Details:</strong> Get more detailed information on any repository. This includes the description, number of stars, programming language used, and other relevant data.</li>
+            <li><strong>Error Handling:</strong> The app gracefully handles errors, ensuring a smooth user experience. If something goes wrong, you'll be guided on how to refresh or navigate back to the main page.</li>
+            <li><strong>Responsive Design:</strong> Enjoy a seamless experience on both desktop and mobile devices, thanks to the responsive design.</li>
+            <li><strong>404 Page:</strong> If you try to navigate to a non-existent page, you'll be directed to a custom 404 page with guidance to get back on track.</li>
+        </ol>
+</section>
+
+<section>
+        <h2>How It Works</h2>
+        <p>This web app uses the GitHub API to fetch data about my repositories. It's built with React, showcasing modern practices like nested routing, error boundaries, and functional components. The app's state-of-the-art error boundary technology ensures that any hiccups are handled gracefully, improving reliability and user experience.</p>
+</section>
+<br>
+
 ### Built With
 
  <table width="100%">

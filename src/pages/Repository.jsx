@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "../api/axios";
+import Layout from "../layout/Layout";
 
 const Repository = () => {
   const [repo, setRepo] = useState(null);
   const { repoName } = useParams();
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchRepo = async () => {
@@ -22,11 +24,13 @@ const Repository = () => {
   if (!repo) return <p>Loading...</p>;
 
   return (
-    <div>
-      <h1>{repo.name}</h1>
+    <Layout>
+      <main>
+       <h1>{repo.name}</h1>
       <p>Description: {repo.description}</p>
-      <Link to="/">Home</Link>
-    </div>
+      <img src={repo.html_url} alt="" />
+      </main>
+    </Layout>
   );
 };
 export default Repository;

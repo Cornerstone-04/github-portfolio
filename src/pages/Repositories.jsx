@@ -21,7 +21,7 @@ const Repositories = () => {
 
   return (
     <Layout>
-      <main className="px-[1.5rem] md:px-[3.5rem] my-[4.12rem] flex flex-col gap-[2.63rem] justify-center items-center sm:items-start">
+      <main className="px-[1.5rem] md:px-[3.5rem] my-[4.12rem] flex flex-col gap-[2.63rem] justify-center items-start">
         <h1 className="text-[3rem] md:text-[3.5rem] font-light">
           My Repositories
         </h1>
@@ -31,8 +31,7 @@ const Repositories = () => {
               <Link
                 key={repo.id}
                 to={`/repositories/${repo.name}`}
-                target="_blank"
-                className="flex flex-col gap-4 w-full max-w-[18rem] mb-12"
+                className="flex flex-col gap-4 w-full sm:max-w-[18rem] mb-12"
               >
                 <img
                   src="https://picsum.photos/200"

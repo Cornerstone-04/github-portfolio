@@ -15,7 +15,7 @@ export default {
         "btn-hover": "#171495"
       },
       backgroundImage: {
-        author: "url('/img/Cornerstone.jpg')",
+        author: "url('./img/Cornerstone.jpg')",
         noise: "url('./src/assets/images/noise.jpg')"
       },
     },

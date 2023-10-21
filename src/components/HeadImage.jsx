@@ -7,7 +7,10 @@ const HeadImage = () => {
   ));
   return (
     <div className="relative w-[10.45rem] h-[10.45rem] rounded-full flex justify-center items-center">
-      <div className="w-[5.625rem] h-[5.625rem] bg-author bg-center absolute rounded-full bg-cover"></div>
+      <div
+        // style={{ backgroundImage: "url(../assets/images/Cornerstone.jpg)" }}
+        className="w-[5.625rem] h-[5.625rem] bg-center absolute rounded-full bg-cover header_image"
+      ></div>
       <div className="absolute w-full h-full" id="bent_text">
         <p className="font-medium">{rotatedText}</p>
       </div>

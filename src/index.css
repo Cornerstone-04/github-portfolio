@@ -29,3 +29,6 @@ a {
   display: none !important;
 }
 
+.header_image{
+  background-image: url("./assets/images/Cornerstone.jpg");
+}

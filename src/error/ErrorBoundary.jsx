@@ -8,11 +8,10 @@ class ErrorBoundary extends React.Component {
   }
 
   static getDerivedStateFromError() {
-    return { hasError: true };
+    return { hasError: true };g
   }
 
   componentDidCatch(error, errorInfo) {
-    // You can also log the error to an error reporting service
     console.error("Uncaught error:", error, errorInfo);
   }
 
@@ -20,7 +19,7 @@ class ErrorBoundary extends React.Component {
     if (this.state.hasError) {
       return (
         <>
-          <h1>Something went wrong.</h1>
+          <h1 className="text-2xl">Something went wrong.</h1>
         </>
       );
     }

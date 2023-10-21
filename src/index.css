@@ -25,3 +25,7 @@ a {
   transform-origin: 0 85px;
   font-size: 1.25rem;
 }
+.slick-slider button.slick-arrow {
+  display: none !important;
+}
+

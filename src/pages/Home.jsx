@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { HeadImage, Loader } from "../components";
 import Layout from "../layout/Layout";
-// import Loader from "../components/Loader";
+import { useForm, ValidationError } from "@formspree/react";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -24,8 +24,20 @@ const Home = () => {
     }
   }, [loading]);
 
+  const [state, handleSubmit] = useForm("mvojlgyq");
+
   if (loading) {
     return <Loader progress={progress} />;
+  }
+
+  if (state.succeeded) {
+    return (
+      <Layout>
+        <main className="px-[1.5rem] md:px-[3.5rem] my-[4rem] md:my-[6rem] w-full h-full flex justify-center items-center">
+          <p className="font-[300] text-4xl md:text-[5rem]">Message sent!</p>
+        </main>
+      </Layout>
+    );
   }
 
   return (
@@ -56,15 +68,23 @@ const Home = () => {
                 engaging experiences.
               </p>
             </div>
-            <form className="flex gap-6 w-full">
-              <input
-                type="text"
-                name=""
-                id=""
+            <form className="flex gap-6 w-full" onSubmit={handleSubmit}>
+              <textarea
+                name="message"
+                id="message"
                 placeholder="Write me a message..."
-                className="py-3 px-3 md:px-6 outline-none flex items-center h-[3.375rem] w-full max-w-[32rem] md:text-2xl placeholder:text-[#5D5D5D] bg-transparent border border-[#5D5D5D]"
+                className="py-3 px-3 md:px-6 outline-none flex items-center h-[3.375rem] w-full max-w-[32rem] md:text-2xl placeholder:text-[#5D5D5D] bg-transparent border border-[#5D5D5D] focus:border-white transition-all ease-linear"
               />
-              <button className="w-full max-w-[6.75rem] h-[3.375rem] flex justify-center items-center bg-btn px-6 py-3">
+              <ValidationError
+                prefix="Message"
+                field="message"
+                errors={state.errors}
+              />
+              <button
+                className="w-full max-w-[6.75rem] h-[3.375rem] flex justify-center items-center bg-btn focus:bg-btn active:bg-btn-hover hover:bg-btn-hover transition-all ease-linear px-6 py-3"
+                type="submit"
+                disabled={state.submitting}
+              >
                 Send
               </button>
             </form>

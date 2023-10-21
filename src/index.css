@@ -29,6 +29,10 @@ a {
   display: none !important;
 }
 
-.header_image{
+.header_image {
   background-image: url("./assets/images/Cornerstone.jpg");
+}
+
+textarea::-webkit-scrollbar {
+  display: none;
 }

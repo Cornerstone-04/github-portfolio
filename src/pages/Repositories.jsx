@@ -15,7 +15,9 @@ const Repositories = () => {
 
   const fetchRepos = async () => {
     try {
-      const response = await axios.get("/users/Cornerstone-04/repos?per_page=100");
+      const response = await axios.get(
+        "/users/Cornerstone-04/repos?per_page=50"
+      );
       setRepos(response.data);
     } catch (error) {
       console.log(error);

@@ -1,6 +1,12 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const NotFound = () => {
+  const navigate = useNavigate();
+  const handleReturnHome = () => {
+    navigate("/");
+    window.location.reload();
+  };
+
   return (
     <div>
       <main className="w-full min-h-screen flex flex-col justify-center items-center gap-4 px-[2rem] text-center">
@@ -8,9 +14,12 @@ const NotFound = () => {
         <p className="text-2xl">
           The page you are looking for cannot be found!
         </p>
-        <Link to="/" className="text-2xl text-link hover:text-btn-hover font-medium">
+        <button
+          className="text-2xl text-link hover:text-btn-hover font-medium border-none outline-none"
+          onClick={handleReturnHome}
+        >
           Return Home
-        </Link>
+        </button>
       </main>
     </div>
   );

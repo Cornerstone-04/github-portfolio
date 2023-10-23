@@ -84,8 +84,8 @@ const Repository = () => {
             <p>Default Branch: &nbsp;{repo.default_branch}</p>
             <p>Number of Commits : &nbsp;{commit.length}</p>
             <p>Stars: &nbsp;{repo.stargazers_count}</p>
-            <p>Created: &nbsp;{repo.created_at.replace(/-/g, " ")}</p>
-            <p>Updated: &nbsp;{repo.updated_at.replace(/-/g, " ")}</p>
+            <p>Created: &nbsp;{new Date(repo.created_at).toDateString()}</p>
+            <p>Updated: &nbsp;{new Date(repo.updated_at).toDateString()}</p>
             <p>Forked Repo: {repo.fork ? "Yes" : "No"}</p>
             <p>Forks: &nbsp;{repo.forks}</p>
             <p>Size: {(repo.size / 1024).toFixed(2)} KBs</p>
@@ -103,12 +103,16 @@ const Repository = () => {
             </p>
             <p>
               Preview: &nbsp;
-              <Link
-                to={repo.homepage && repo.homepage}
-                className="text-link hover:text-btn-hover"
-              >
-                {repo.homepage ? repo.homepage : "No hosted page"}
-              </Link>
+              {repo.homepage ? (
+                <Link
+                  to={repo.homepage && repo.homepage}
+                  className="text-link hover:text-btn-hover"
+                >
+                  {repo.homepage}
+                </Link>
+              ) : (
+                "No hosted page"
+              )}
             </p>
           </div>
         </section>

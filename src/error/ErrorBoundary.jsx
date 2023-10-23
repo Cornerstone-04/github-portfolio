@@ -18,7 +18,12 @@ class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      return <NotFound />;
+      return (
+        <>
+          {/* <hi className="text-2xl">Something went wrong</hi> */}
+          <NotFound/>
+        </>
+      );
     }
 
     return this.props.children;

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import NotFound from "./NotFound";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -8,7 +9,7 @@ class ErrorBoundary extends React.Component {
   }
 
   static getDerivedStateFromError() {
-    return { hasError: true };g
+    return { hasError: true };
   }
 
   componentDidCatch(error, errorInfo) {
@@ -17,11 +18,7 @@ class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      return (
-        <>
-          <h1 className="text-2xl">Something went wrong.</h1>
-        </>
-      );
+      return <NotFound />;
     }
 
     return this.props.children;

@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Home, NotFound, Repositories, Repository } from "./pages";
+import { Home, Repositories, Repository } from "./pages";
 import ErrorBoundary from "./error/ErrorBoundary";
 
 const AppRoutes = () => {
@@ -10,7 +10,7 @@ const AppRoutes = () => {
           <Route path="/" exact element={<Home />} />
           <Route path="/repositories" element={<Repositories />} />
           <Route path="/repositories/:repoName" element={<Repository />} />
-          <Route path="*" element={<NotFound />} />
+          {/* <Route path="*" element={<NotFound />} /> */}
         </Routes>
       </ErrorBoundary>
     </Router>

@@ -3,7 +3,8 @@ export const settings = {
   infinite: true,
   speed: 500,
   slidesToShow: 4, // Number of items to show on the screen
-  slidesToScroll: 1,
+  slidesToScroll: 2,
+  // centerMode: true,
   responsive: [
     {
       breakpoint: 1024,

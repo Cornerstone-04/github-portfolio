@@ -65,7 +65,7 @@ const Repositories = () => {
         <h1 className="text-[3rem] md:text-[3.5rem] font-light">
           My Repositories
         </h1>
-        <section className="w-full max-h-[26.6rem]">
+        <section className="w-full">
           <Slider ref={sliderRef} {...settings}>
             {repos &&
               repos.map((repo) => (

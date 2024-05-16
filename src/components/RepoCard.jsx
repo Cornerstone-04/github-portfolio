@@ -10,7 +10,7 @@ const RepoCard = ({ key, link, img, name, desc, watch }) => {
     <Link
       key={key}
       to={link}
-      className="flex flex-col gap-2 w-full sm:max-w-[18rem] mb-12"
+      className="flex flex-col gap-2 w-full sm:max-w-[250px] mb-12"
     >
       <img src={img} alt="" className="h-[18rem] w-full" />
       <h2 className="text-lg md:text-2xl font-medium capitalize">{name}</h2>

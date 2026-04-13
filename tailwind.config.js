@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       fontFamily: {
@@ -12,13 +11,8 @@ export default {
         text: "#DDDDDD",
         link: "#2622FF",
         btn: "#030081",
-        "btn-hover": "#171495"
-      },
-      backgroundImage: {
-        author: "url('./img/Cornerstone.jpg')",
-        noise: "url('./src/assets/images/noise.jpg')"
+        "btn-hover": "#171495",
       },
     },
   },
-  plugins: [],
 };

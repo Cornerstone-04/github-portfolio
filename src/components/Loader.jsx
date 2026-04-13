@@ -5,7 +5,7 @@ import { fadeInVariants } from "../utils/animations";
 const Loader = ({ progress }) => {
   return (
     <motion.div
-      className="fixed top-0 left-0 w-full h-full bg-dark flex items-center justify-center flex-col gap-12 z-50 px-[3.5rem]"
+      className="fixed top-0 left-0 w-full h-full bg-dark flex items-center justify-center flex-col gap-12 z-50 px-14"
       variants={fadeInVariants}
       initial="initial"
       animate="animate"
@@ -28,10 +28,11 @@ const Loader = ({ progress }) => {
               animate={{ scale: 1 }}
               transition={{ duration: 0.2 }}
             >
-              {progress}<span className="text-lg">%</span>
+              {progress}
+              <span className="text-lg">%</span>
             </motion.h1>
           </div>
-          
+
           <motion.div
             className="h-1 bg-white mb-6"
             initial={{ scaleX: 0 }}
@@ -39,7 +40,7 @@ const Loader = ({ progress }) => {
             transition={{ duration: 0.3, ease: "easeOut" }}
             style={{ originX: 0 }}
           ></motion.div>
-          
+
           <motion.div
             className="text-sm md:text-base font-light text-text tracking-wide"
             key={Math.floor(progress / 25)}

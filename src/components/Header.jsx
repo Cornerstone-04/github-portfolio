@@ -1,53 +1,202 @@
-import { Link, useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
-import { fadeInVariants, staggerContainer, itemVariants } from "../utils/animations";
+import { useEffect, useState } from "react";
+import { useLocation, Link } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+
+const navItems = [
+  { label: "Home", to: "/" },
+  { label: "Repositories", to: "/repositories" },
+];
+
+const backdropVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.2,
+      ease: "easeOut",
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      duration: 0.18,
+      ease: "easeInOut",
+    },
+  },
+};
+
+const menuVariants = {
+  hidden: {
+    opacity: 0,
+    y: -12,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.24,
+      ease: "easeOut",
+      when: "beforeChildren",
+      staggerChildren: 0.06,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -8,
+    transition: {
+      duration: 0.18,
+      ease: "easeInOut",
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: {
+    opacity: 0,
+    y: -6,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.2,
+      ease: "easeOut",
+    },
+  },
+};
 
 const Header = () => {
   const { pathname } = useLocation();
-  const splitLocation = pathname.split("/");
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const isActive = (to) => {
+    if (to === "/") return pathname === "/";
+    return pathname.startsWith(to);
+  };
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
   return (
-    <motion.header
-      className="w-full flex justify-between items-center px-6 md:px-[3.5rem] pt-6 md:pt-[2.5rem]"
-      variants={staggerContainer}
-      initial="initial"
-      animate="animate"
-    >
-      <motion.h1
-        className="uppercase font-extrabold text-lg md:text-2xl"
-        variants={fadeInVariants}
-      >
-        Repo&#8208;View
-      </motion.h1>
-      <motion.nav variants={staggerContainer} initial="initial" animate="animate">
-        <ul className="flex gap-4 md:gap-[3.5rem] text-lg md:text-2xl">
-          <motion.li variants={itemVariants}>
+    <>
+      <header className="relative z-50 w-full px-4 md:px-14 pt-6">
+        <div className="mx-auto border-b border-[#5E5E5E] pb-4">
+          <div className="flex items-center justify-between">
             <Link
               to="/"
-              className={
-                splitLocation[1] === ""
-                  ? "font-bold text-white"
-                  : "font-medium text-[#E3E3E3] hover:text-white transition-colors"
-              }
+              className="text-base md:text-lg font-medium tracking-tight"
             >
-              Home
+              Cornerstone Ephraim
             </Link>
-          </motion.li>
-          <motion.li variants={itemVariants}>
-            <Link
-              to="/repositories"
-              className={
-                splitLocation[1] === "repositories"
-                  ? "font-bold text-white"
-                  : "font-medium text-[#E3E3E3] hover:text-white transition-colors"
-              }
+
+            <nav className="hidden md:block">
+              <ul className="flex items-center gap-6 md:gap-8 text-sm md:text-base">
+                {navItems.map((item) => {
+                  const active = isActive(item.to);
+
+                  return (
+                    <li key={item.to}>
+                      <Link
+                        to={item.to}
+                        className={`relative transition-colors duration-200 ${
+                          active ? "text-white" : "text-text hover:text-white"
+                        }`}
+                      >
+                        {item.label}
+                        {active && (
+                          <span className="absolute left-0 -bottom-1 h-0.5 w-full bg-white" />
+                        )}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+
+            <button
+              type="button"
+              onClick={() => setMenuOpen((prev) => !prev)}
+              className="md:hidden flex flex-col justify-center gap-1.25 w-10 h-10"
+              aria-label="Toggle menu"
+              aria-expanded={menuOpen}
             >
-              Repositories
-            </Link>
-          </motion.li>
-        </ul>
-      </motion.nav>
-    </motion.header>
+              <span
+                className={`block h-0.5 w-6 bg-white transition-all duration-300 ${
+                  menuOpen ? "translate-y-1.75 rotate-45" : ""
+                }`}
+              />
+              <span
+                className={`block h-0.5 w-6 bg-white transition-all duration-300 ${
+                  menuOpen ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`block h-0.5 w-6 bg-white transition-all duration-300 ${
+                  menuOpen ? "-translate-y-1.75 -rotate-45" : ""
+                }`}
+              />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <>
+            <motion.button
+              type="button"
+              aria-label="Close menu overlay"
+              className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm md:hidden"
+              variants={backdropVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              onClick={() => setMenuOpen(false)}
+            />
+
+            <motion.nav
+              className="fixed left-4 right-4 top-22 z-50 border border-[#5E5E5E] bg-dark/95 backdrop-blur-md md:hidden"
+              variants={menuVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <motion.ul className="flex flex-col gap-4 p-4 text-sm">
+                {navItems.map((item) => {
+                  const active = isActive(item.to);
+
+                  return (
+                    <motion.li key={item.to} variants={itemVariants}>
+                      <Link
+                        to={item.to}
+                        className={`inline-block relative transition-colors duration-200 ${
+                          active ? "text-white" : "text-text hover:text-white"
+                        }`}
+                      >
+                        {item.label}
+                        {active && (
+                          <span className="absolute left-0 -bottom-1 h-0.5 w-full bg-white" />
+                        )}
+                      </Link>
+                    </motion.li>
+                  );
+                })}
+              </motion.ul>
+            </motion.nav>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

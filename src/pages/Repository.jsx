@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import axios from "../api/axios";
 import Layout from "../layout/Layout";
 import { PageTransition } from "../components";
 import { NavArrow } from "../assets/icons";
+import { useRepositoryCommitsQuery, useRepositoryQuery } from "../hooks";
 import {
   headingVariants,
   itemVariants,
@@ -14,40 +13,50 @@ import {
 } from "../utils/animations";
 
 const Repository = () => {
-  const [repo, setRepo] = useState(null);
-  const [commit, setCommits] = useState(null);
   const { repoName } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchRepo = async () => {
-      try {
-        const response = await axios.get(`/repos/Cornerstone-04/${repoName}`);
-        setRepo(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const {
+    data: repo,
+    isLoading: repoLoading,
+    isError: repoError,
+    error: repoErrorDetails,
+  } = useRepositoryQuery(repoName);
 
-    const fetchCommits = async () => {
-      try {
-        const response = await axios.get(
-          `/repos/Cornerstone-04/${repoName}/commits`
-        );
-        setCommits(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const { data: commits = [], isLoading: commitsLoading } =
+    useRepositoryCommitsQuery(repoName);
 
-    fetchRepo();
-    fetchCommits();
-  }, [repoName]);
+  if (repoLoading) {
+    return (
+      <Layout>
+        <PageTransition>
+          <main className="px-6 md:px-14 my-16 md:my-24">
+            <p className="text-text text-lg">Loading repository...</p>
+          </main>
+        </PageTransition>
+      </Layout>
+    );
+  }
+
+  if (repoError) {
+    return (
+      <Layout>
+        <PageTransition>
+          <main className="px-6 md:px-14 my-16] md:my-24">
+            <p className="text-red-400 text-lg">Failed to load repository.</p>
+            <p className="text-text text-sm mt-2">
+              {repoErrorDetails?.message || "Something went wrong"}
+            </p>
+          </main>
+        </PageTransition>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
       <PageTransition>
-        <main className="px-[1.5rem] md:px-[3.5rem] my-[4rem] md:my-[6rem] flex flex-col gap-12">
+        <main className="px-6 md:px-14 my-16 md:my-24 flex flex-col gap-12">
           <motion.button
             onClick={() => navigate("/repositories")}
             className="flex items-center gap-3 text-text hover:text-white transition-all ease-linear w-fit border border-white p-3"
@@ -73,11 +82,12 @@ const Repository = () => {
             >
               {repo?.name}
             </motion.h1>
+
             <motion.p
               variants={fadeInVariants}
               className="text-text text-lg md:text-xl mb-8"
             >
-              {repo?.description ? repo.description : "No description available"}
+              {repo?.description || "No description available"}
             </motion.p>
 
             <motion.div
@@ -90,13 +100,13 @@ const Repository = () => {
                 className="border border-white p-6"
                 variants={itemVariants}
               >
-                <img 
-                  src={repo?.owner.avatar_url} 
-                  alt={repo?.owner.login}
+                <img
+                  src={repo?.owner?.avatar_url}
+                  alt={repo?.owner?.login}
                   className="w-full h-auto mb-4 border border-white"
                 />
                 <p className="text-text font-medium text-base">
-                  <span className="font-bold">Owner:</span> {repo?.owner.login}
+                  <span className="font-bold">Owner:</span> {repo?.owner?.login}
                 </p>
               </motion.div>
 
@@ -108,16 +118,18 @@ const Repository = () => {
               >
                 {[
                   { label: "Language", value: repo?.language || "N/A" },
-                  { label: "Stars", value: repo?.stargazers_count },
-                  { label: "Forks", value: repo?.forks },
-                  { label: "Watchers", value: repo?.watchers },
-                ].map((item, idx) => (
+                  { label: "Stars", value: repo?.stargazers_count ?? 0 },
+                  { label: "Forks", value: repo?.forks ?? 0 },
+                  { label: "Watchers", value: repo?.watchers ?? 0 },
+                ].map((item) => (
                   <motion.div
-                    key={idx}
+                    key={item.label}
                     className="border border-white p-4"
                     variants={itemVariants}
                   >
-                    <p className="text-sm text-text font-medium mb-1">{item.label}</p>
+                    <p className="text-sm text-text font-medium mb-1">
+                      {item.label}
+                    </p>
                     <p className="text-xl font-light">{item.value}</p>
                   </motion.div>
                 ))}
@@ -130,22 +142,57 @@ const Repository = () => {
               initial="initial"
               animate="animate"
             >
-              <motion.div className="border border-white p-6" variants={itemVariants}>
-                <p className="text-sm text-text font-medium mb-2">Repository Info</p>
+              <motion.div
+                className="border border-white p-6"
+                variants={itemVariants}
+              >
+                <p className="text-sm text-text font-medium mb-2">
+                  Repository Info
+                </p>
                 <div className="space-y-3 text-base font-light">
-                  <p><span className="font-medium">Branch:</span> {repo?.default_branch}</p>
-                  <p><span className="font-medium">Commits:</span> {commit?.length || 0}</p>
-                  <p><span className="font-medium">Size:</span> {(repo?.size / 1024).toFixed(2)} KB</p>
-                  <p><span className="font-medium">Issues:</span> {repo?.open_issues}</p>
-                  <p><span className="font-medium">Forked:</span> {repo?.fork ? "Yes" : "No"}</p>
+                  <p>
+                    <span className="font-medium">Branch:</span>{" "}
+                    {repo?.default_branch}
+                  </p>
+                  <p>
+                    <span className="font-medium">Commits:</span>{" "}
+                    {commitsLoading ? "Loading..." : commits.length}
+                  </p>
+                  <p>
+                    <span className="font-medium">Size:</span>{" "}
+                    {repo?.size
+                      ? `${(repo.size / 1024).toFixed(2)} KB`
+                      : "0 KB"}
+                  </p>
+                  <p>
+                    <span className="font-medium">Issues:</span>{" "}
+                    {repo?.open_issues ?? 0}
+                  </p>
+                  <p>
+                    <span className="font-medium">Forked:</span>{" "}
+                    {repo?.fork ? "Yes" : "No"}
+                  </p>
                 </div>
               </motion.div>
 
-              <motion.div className="border border-white p-6" variants={itemVariants}>
+              <motion.div
+                className="border border-white p-6"
+                variants={itemVariants}
+              >
                 <p className="text-sm text-text font-medium mb-2">Timeline</p>
                 <div className="space-y-3 text-base font-light">
-                  <p><span className="font-medium">Created:</span> {repo && new Date(repo.created_at).toDateString()}</p>
-                  <p><span className="font-medium">Updated:</span> {repo && new Date(repo.updated_at).toDateString()}</p>
+                  <p>
+                    <span className="font-medium">Created:</span>{" "}
+                    {repo?.created_at
+                      ? new Date(repo.created_at).toDateString()
+                      : "N/A"}
+                  </p>
+                  <p>
+                    <span className="font-medium">Updated:</span>{" "}
+                    {repo?.updated_at
+                      ? new Date(repo.updated_at).toDateString()
+                      : "N/A"}
+                  </p>
                 </div>
               </motion.div>
             </motion.div>
@@ -164,9 +211,12 @@ const Repository = () => {
                 variants={hoverScaleVariants}
                 whileHover="hover"
               >
-                <span className="text-base md:text-lg font-light">View on GitHub</span>
+                <span className="text-base md:text-lg font-light">
+                  View on GitHub
+                </span>
                 <span className="text-xl">→</span>
               </motion.a>
+
               {repo?.homepage ? (
                 <motion.a
                   href={repo.homepage}
@@ -176,7 +226,9 @@ const Repository = () => {
                   variants={hoverScaleVariants}
                   whileHover="hover"
                 >
-                  <span className="text-base md:text-lg font-light">Live Preview</span>
+                  <span className="text-base md:text-lg font-light">
+                    Live Preview
+                  </span>
                   <span className="text-xl">→</span>
                 </motion.a>
               ) : (
@@ -184,7 +236,9 @@ const Repository = () => {
                   className="border border-[#5D5D5D] p-6 text-text opacity-50"
                   variants={itemVariants}
                 >
-                  <span className="text-base md:text-lg font-light">No hosted preview</span>
+                  <span className="text-base md:text-lg font-light">
+                    No hosted preview
+                  </span>
                 </motion.div>
               )}
             </motion.div>

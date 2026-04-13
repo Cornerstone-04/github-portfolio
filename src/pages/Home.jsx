@@ -9,36 +9,24 @@ import {
   fadeInVariants,
   buttonHoverVariants,
 } from "../utils/animations";
-// import { Link } from "react-router-dom";
 
 const Home = () => {
   const [state, handleSubmit] = useForm("mvojlgyq");
 
-  // if (state.succeeded) {
-  //   return (
-  //     <Layout>
-  //       <main className="px-[1.5rem] md:px-[3.5rem] my-[4rem] md:my-[6rem] w-full h-full flex justify-center items-center">
-  //         <p className="font-[300] text-4xl md:text-[5rem]">Message sent!</p>
-  //         <Link to ="/">Return home</Link>
-  //       </main>
-  //     </Layout>
-  //   );
-  // }
-
   return (
     <Layout>
       <PageTransition>
-        <main className="px-[1.5rem] md:px-[3.5rem] my-[4rem] md:my-[6rem] grid gap-8 md:gap-16">
+        <main className="px-6 md:px-14 my-16 md:my-24 grid gap-8 md:gap-16">
           <motion.h1
             variants={headingVariants}
             initial="initial"
             animate="animate"
-            className="font-[300] text-4xl md:text-[5rem]"
+            className="font-light text-4xl md:text-[5rem]"
           >
             I am Cornerstone Ephraim
           </motion.h1>
           <motion.section
-            className="flex flex-col md:flex-row items-start gap-8 md:gap-[7rem]"
+            className="flex flex-col md:flex-row items-start gap-8 md:gap-28"
             variants={staggerContainer}
             initial="initial"
             animate="animate"
@@ -47,7 +35,7 @@ const Home = () => {
               <HeadImage />
             </motion.div>
             <motion.div
-              className="flex flex-col gap-[5rem]"
+              className="flex flex-col gap-20"
               variants={itemVariants}
             >
               <motion.div variants={fadeInVariants}>
@@ -63,8 +51,8 @@ const Home = () => {
                   Proficient in HTML, CSS, and JavaScript, along with popular
                   frameworks and libraries such as ReactJS, NextJS, I am
                   passionate about optimizing user journeys, enhancing
-                  accessibility, and improving load times to deliver seamless and
-                  engaging experiences.
+                  accessibility, and improving load times to deliver seamless
+                  and engaging experiences.
                 </p>
               </motion.div>
               <motion.form
@@ -76,7 +64,7 @@ const Home = () => {
                   name="message"
                   id="message"
                   placeholder="Write me a message..."
-                  className="py-3 px-3 md:px-6 outline-none flex items-center h-[3.375rem] w-full max-w-[32rem] md:text-2xl placeholder:text-[#5D5D5D] bg-transparent border border-[#5D5D5D] focus:border-white transition-all ease-linear"
+                  className="py-3 px-3 md:px-6 outline-none flex items-center h-13.5 w-full max-w-lg  placeholder:text-[#5D5D5D] bg-transparent border border-[#5D5D5D] focus:border-white transition-all ease-linear"
                 />
                 <ValidationError
                   prefix="Message"
@@ -84,15 +72,28 @@ const Home = () => {
                   errors={state.errors}
                 />
                 <motion.button
-                  className="w-full max-w-[6.75rem] h-[3.375rem] flex justify-center items-center bg-btn focus:bg-btn active:bg-btn-hover hover:bg-btn-hover transition-all ease-linear px-6 py-3 border border-btn hover:border-white"
                   type="submit"
-                  disabled={state.submitting}
-                  whileHover="hover"
-                  whileTap="tap"
+                  disabled={state.submitting || state.succeeded}
+                  className={`relative flex items-center justify-center px-6 py-3 min-w-27.5 border transition-all duration-200 ${
+                    state.succeeded
+                      ? "border-white text-white"
+                      : "border-[#5D5D5D] text-text hover:text-white hover:border-white"
+                  } ${state.submitting ? "cursor-not-allowed opacity-70" : ""}`}
+                  whileHover={!state.submitting ? "hover" : ""}
+                  whileTap={!state.submitting ? "tap" : ""}
                   variants={buttonHoverVariants}
                   initial="initial"
                 >
-                  {state.submitting ? "Sending..." : "Send"}
+                  {state.submitting ? (
+                    <span className="flex items-center gap-2">
+                      <span className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      Sending
+                    </span>
+                  ) : state.succeeded ? (
+                    "Sent ✓"
+                  ) : (
+                    "Send"
+                  )}
                 </motion.button>
               </motion.form>
             </motion.div>

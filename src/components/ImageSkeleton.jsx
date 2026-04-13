@@ -17,7 +17,7 @@ const ImageSkeleton = ({ src, alt, className = "" }) => {
   return (
     <div className={`relative overflow-hidden ${className}`}>
       {isLoading && (
-        <div className="absolute inset-0 bg-gradient-to-r from-dark via-gray-700 to-dark animate-pulse z-10"></div>
+        <div className="absolute inset-0 bg-linear-to-r from-dark via-gray-700 to-dark animate-pulse z-10"></div>
       )}
       <img
         src={src}

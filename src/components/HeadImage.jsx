@@ -26,7 +26,7 @@ const HeadImage = () => {
         variants={borderPulseVariants}
         animate="animate"
       ></motion.div>
-      <div className="w-[5.625rem] h-[5.625rem] bg-center absolute rounded-full bg-cover header_image border border-white"></div>
+      <div className="w-22.5 h-22.5 bg-center absolute rounded-full bg-cover header_image border border-white"></div>
       <div className="absolute w-full h-full" id="bent_text">
         <p className="font-medium">{rotatedText}</p>
       </div>

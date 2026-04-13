@@ -1,7 +1,7 @@
 import Arrow from "./arrow-left.svg";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 
-const NavArrow = ({className, onClick}) => {
+const NavArrow = ({ className, onClick, showCircle }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -18,6 +18,7 @@ const NavArrow = ({className, onClick}) => {
         r="23.5"
         transform="rotate(-90 24 24)"
         stroke="#C4C4C4"
+        className={showCircle ? "hidden" : ""}
       />
       <path
         d="M38.3999 24L10.0799 24M10.0799 24C13.9199 24 21.5999 21.696 21.5999 12.48M10.0799 24C13.9199 24.16 21.5999 26.688 21.5999 35.52"
@@ -29,8 +30,9 @@ const NavArrow = ({className, onClick}) => {
 };
 
 NavArrow.propTypes = {
-    className: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired
-}
+  className: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  showCircle: PropTypes.bool,
+};
 
 export { Arrow, NavArrow };

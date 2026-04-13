@@ -2,21 +2,52 @@
 export const pageVariants = {
   initial: {
     opacity: 0,
-    y: 20,
+    y: 24,
+    scale: 0.985,
+    filter: "blur(8px)",
   },
   animate: {
     opacity: 1,
     y: 0,
+    scale: 1,
+    filter: "blur(0px)",
     transition: {
-      duration: 0.6,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: [0.22, 1, 0.36, 1],
     },
   },
   exit: {
     opacity: 0,
-    y: -20,
+    y: -18,
+    scale: 0.985,
+    filter: "blur(6px)",
     transition: {
-      duration: 0.3,
+      duration: 0.35,
+      ease: [0.4, 0, 1, 1],
+    },
+  },
+};
+
+export const pageOverlayVariants = {
+  initial: {
+    scaleX: 0,
+    transformOrigin: "left",
+    opacity: 0.12,
+  },
+  animate: {
+    scaleX: 0,
+    opacity: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+  exit: {
+    scaleX: 1,
+    opacity: 0.08,
+    transition: {
+      duration: 0.4,
+      ease: [0.65, 0, 0.35, 1],
     },
   },
 };
@@ -225,6 +256,77 @@ export const buttonHoverVariants = {
     transition: {
       duration: 0.3,
       ease: "easeInOut",
+    },
+  },
+};
+
+export const navContainerVariants = {
+  initial: {
+    opacity: 0,
+    y: -18,
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.55,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+export const navLinkUnderlineVariants = {
+  initial: {
+    scaleX: 0,
+    opacity: 0,
+  },
+  hover: {
+    scaleX: 1,
+    opacity: 1,
+    transition: {
+      duration: 0.25,
+      ease: "easeOut",
+    },
+  },
+};
+
+export const mobileMenuVariants = {
+  initial: {
+    opacity: 0,
+    y: -16,
+    scale: 0.98,
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.3,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -10,
+    scale: 0.98,
+    transition: {
+      duration: 0.2,
+      ease: "easeInOut",
+    },
+  },
+};
+
+export const mobileMenuItemVariants = {
+  initial: {
+    opacity: 0,
+    y: 12,
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.25,
+      ease: "easeOut",
     },
   },
 };

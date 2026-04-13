@@ -7,4 +7,13 @@ import ImageSkeleton from "./ImageSkeleton";
 import Carousel from "./Carousel";
 import PageTransition from "./PageTransition";
 
-export { Footer, Header, HeadImage, Loader, RepoCard, ImageSkeleton, Carousel, PageTransition };
+export {
+  Footer,
+  Header,
+  HeadImage,
+  Loader,
+  RepoCard,
+  ImageSkeleton,
+  Carousel,
+  PageTransition,
+};

@@ -14,9 +14,9 @@ const RepoCard = ({ key, link, img, name, desc, watch }) => {
     >
       <Link
         to={link}
-        className="flex flex-col gap-2 w-full sm:max-w-[250px] mb-12"
+        className="flex flex-col gap-2 w-full mb-12"
       >
-        <ImageSkeleton src={img} alt={name} className="h-[18rem] w-full border border-white" />
+        <ImageSkeleton src={img} alt={name} className="h-[24rem] md:h-[28rem] w-full border border-white" />
         <h2 className="text-lg md:text-2xl font-medium capitalize">{name}</h2>
         <p className="text-base overflow-ellipsis text-text line-clamp-2">{desc}</p>
         <p className="text-[#D3D3D3] font-medium text-base">

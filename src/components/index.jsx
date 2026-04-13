@@ -3,5 +3,6 @@ import Header from "./Header";
 import HeadImage from "./HeadImage";
 import Loader from "./Loader";
 import RepoCard from "./RepoCard";
+import ImageSkeleton from "./ImageSkeleton";
 
-export { Footer, Header, HeadImage, Loader, RepoCard };
+export { Footer, Header, HeadImage, Loader, RepoCard, ImageSkeleton };

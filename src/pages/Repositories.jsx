@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "../api/axios";
 import Layout from "../layout/Layout";
-import { Loader, RepoCard } from "../components";
+import { RepoCard } from "../components";
 import Slider from "react-slick";
 import { settings } from "../data/carouselSettings";
 import { NavArrow } from "../assets/icons";
@@ -10,8 +10,6 @@ import { GithubLogo } from "../assets/images";
 const Repositories = () => {
   const sliderRef = useRef(null);
   const [repos, setRepos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [progress, setProgress] = useState(0);
 
   const fetchRepos = async () => {
     try {
@@ -26,26 +24,7 @@ const Repositories = () => {
 
   useEffect(() => {
     fetchRepos();
-
-    if (loading) {
-      const interval = setInterval(() => {
-        setProgress((prev) => {
-          if (prev >= 100) {
-            clearInterval(interval);
-            setLoading(false);
-            return 100;
-          }
-          return prev + 25;
-        });
-      }, 500);
-
-      return () => clearInterval(interval);
-    }
-  }, [loading]);
-
-  if (loading) {
-    return <Loader progress={progress} />;
-  }
+  }, []);
 
   const goToNextSlide = () => {
     if (sliderRef.current) {
@@ -61,8 +40,8 @@ const Repositories = () => {
 
   return (
     <Layout>
-      <main className="px-[1.5rem] md:px-[3.5rem] my-[3rem] md:mb-[4.12rem] md:mt-[2rem] flex flex-col gap-[2.63rem] justify-center items-start">
-        <h1 className="text-[3rem] md:text-[3.5rem] font-light">
+      <main className="px-[1.5rem] md:px-[3.5rem] my-[4rem] md:mb-[6rem] md:mt-[4rem] flex flex-col gap-[4rem] justify-center items-start">
+        <h1 className="text-[3rem] md:text-[4rem] font-light tracking-tight">
           My Repositories
         </h1>
         <section className="w-full">
@@ -80,15 +59,19 @@ const Repositories = () => {
               ))}
           </Slider>
         </section>
-        <div className="flex justify-center items-center gap-6">
-          <NavArrow
-            className="hover:opacity-75 cursor-pointer transition-all ease-linear"
+        <div className="flex justify-center items-center gap-8">
+          <button
             onClick={goToPrevSlide}
-          />
-          <NavArrow
-            className="rotate-180 hover:opacity-75 cursor-pointer transition-all ease-linear"
+            className="border border-white p-3 hover:bg-white hover:text-dark transition-all ease-linear duration-300"
+          >
+            <NavArrow className="w-6 h-6" />
+          </button>
+          <button
             onClick={goToNextSlide}
-          />
+            className="border border-white p-3 hover:bg-white hover:text-dark transition-all ease-linear duration-300"
+          >
+            <NavArrow className="w-6 h-6 rotate-180" />
+          </button>
         </div>
       </main>
     </Layout>

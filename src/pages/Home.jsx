@@ -1,35 +1,10 @@
-import { useEffect, useState } from "react";
-import { HeadImage, Loader } from "../components";
-import Layout from "../layout/Layout";
 import { useForm, ValidationError } from "@formspree/react";
+import { HeadImage } from "../components";
+import Layout from "../layout/Layout";
 // import { Link } from "react-router-dom";
 
 const Home = () => {
-  const [loading, setLoading] = useState(true);
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    if (loading) {
-      const interval = setInterval(() => {
-        setProgress((prev) => {
-          if (prev >= 100) {
-            clearInterval(interval);
-            setLoading(false);
-            return 100;
-          }
-          return prev + 25;
-        });
-      }, 500);
-
-      return () => clearInterval(interval);
-    }
-  }, [loading]);
-
   const [state, handleSubmit] = useForm("mvojlgyq");
-
-  if (loading) {
-    return <Loader progress={progress} />;
-  }
 
   // if (state.succeeded) {
   //   return (

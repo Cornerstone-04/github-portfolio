@@ -6,6 +6,8 @@ import RepoCard from "./RepoCard";
 import ImageSkeleton from "./ImageSkeleton";
 import Carousel from "./Carousel";
 import PageTransition from "./PageTransition";
+import ScrollToTop from "./ScrollToTop";
+import ScrollToTopButton from "./ScrollToTopButton";
 
 export {
   Footer,
@@ -16,4 +18,6 @@ export {
   ImageSkeleton,
   Carousel,
   PageTransition,
+  ScrollToTop,
+  ScrollToTopButton,
 };

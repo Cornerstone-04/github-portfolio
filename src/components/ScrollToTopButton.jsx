@@ -1,0 +1,45 @@
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const ScrollToTopButton = () => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setVisible(window.scrollY > 300);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.button
+          type="button"
+          onClick={scrollToTop}
+          aria-label="Scroll to top"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 12 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+          className="fixed bottom-6 right-4 md:right-8 z-50 border border-[#5E5E5E] bg-dark px-4 py-3 text-sm text-white transition-colors duration-200 hover:border-white"
+        >
+          ↑
+        </motion.button>
+      )}
+    </AnimatePresence>
+  );
+};
+
+export default ScrollToTopButton;

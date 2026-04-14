@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Footer, Header } from "../components";
+import { Footer, Header, ScrollToTopButton } from "../components";
 
 const Layout = ({ children }) => {
   return (
@@ -7,6 +7,7 @@ const Layout = ({ children }) => {
       <Header />
       <div className="flex-1">{children}</div>
       <Footer />
+      <ScrollToTopButton />
     </div>
   );
 };

@@ -8,7 +8,7 @@ import { AnimatePresence } from "framer-motion";
 import { Home, Repositories, Repository } from "./pages";
 import ErrorBoundary from "./error/ErrorBoundary";
 import NotFound from "./error/NotFound";
-import ScrollToTop from "./components/ScrollToTop";
+import { ScrollToTop } from "./components";
 
 const AnimatedRoutes = () => {
   const location = useLocation();

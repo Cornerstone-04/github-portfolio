@@ -1,75 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
+import {
+  backdropVariants,
+  headerItemVariants,
+  menuVariants,
+} from "../utils/animations";
 
 const navItems = [
   { label: "Home", to: "/" },
   { label: "Repositories", to: "/repositories" },
 ];
 
-const backdropVariants = {
-  hidden: {
-    opacity: 0,
-  },
-  visible: {
-    opacity: 1,
-    transition: {
-      duration: 0.2,
-      ease: "easeOut",
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: {
-      duration: 0.18,
-      ease: "easeInOut",
-    },
-  },
-};
-
-const menuVariants = {
-  hidden: {
-    opacity: 0,
-    y: -12,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.24,
-      ease: "easeOut",
-      when: "beforeChildren",
-      staggerChildren: 0.06,
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: -8,
-    transition: {
-      duration: 0.18,
-      ease: "easeInOut",
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: {
-    opacity: 0,
-    y: -6,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.2,
-      ease: "easeOut",
-    },
-  },
-};
-
 const Header = () => {
   const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
+  const lastScrollY = useRef(0);
 
   const isActive = (to) => {
     if (to === "/") return pathname === "/";
@@ -87,16 +34,46 @@ const Header = () => {
     };
   }, [menuOpen]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY <= 20) {
+        setShowHeader(true);
+      } else if (currentScrollY > lastScrollY.current) {
+        setShowHeader(false);
+      } else {
+        setShowHeader(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
-      <header className="relative z-50 w-full px-4 md:px-14 pt-6">
-        <div className="mx-auto border-b border-[#5E5E5E] pb-4">
+      <motion.header
+        initial={false}
+        animate={{
+          y: showHeader || menuOpen ? 0 : -120,
+        }}
+        transition={{
+          duration: 0.25,
+          ease: "easeInOut",
+        }}
+        className="sticky top-0 backdrop-blur-sm z-50 w-full pt-6"
+      >
+        <div className="mx-auto border-b border-[#5E5E5E] px-4 md:px-14 pb-4">
           <div className="flex items-center justify-between">
             <Link
               to="/"
               className="text-base md:text-lg font-medium tracking-tight"
             >
-              Cornerstone Ephraim
+              GitHub Portfolio
             </Link>
 
             <nav className="hidden md:block">
@@ -148,7 +125,7 @@ const Header = () => {
             </button>
           </div>
         </div>
-      </header>
+      </motion.header>
 
       <AnimatePresence>
         {menuOpen && (
@@ -176,7 +153,7 @@ const Header = () => {
                   const active = isActive(item.to);
 
                   return (
-                    <motion.li key={item.to} variants={itemVariants}>
+                    <motion.li key={item.to} variants={headerItemVariants}>
                       <Link
                         to={item.to}
                         className={`inline-block relative transition-colors duration-200 ${

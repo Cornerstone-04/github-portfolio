@@ -130,7 +130,7 @@ const Repository = () => {
                     <p className="text-sm text-text font-medium mb-1">
                       {item.label}
                     </p>
-                    <p className="text-xl font-light">{item.value}</p>
+                    <p className="text-lg font-light">{item.value}</p>
                   </motion.div>
                 ))}
               </motion.div>
@@ -207,7 +207,7 @@ const Repository = () => {
                 href={repo?.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border border-white p-6 hover:bg-white hover:text-dark transition-all ease-linear duration-300 flex items-center justify-between cursor-pointer"
+                className="border border-white p-6 hover:bg-white text-white hover:text-black! transition-all ease-linear duration-300 flex items-center justify-between cursor-pointer"
                 variants={hoverScaleVariants}
                 whileHover="hover"
               >
@@ -222,7 +222,7 @@ const Repository = () => {
                   href={repo.homepage}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border border-white p-6 hover:bg-white hover:text-dark transition-all ease-linear duration-300 flex items-center justify-between cursor-pointer"
+                  className="border border-white p-6 hover:bg-white text-white hover:text-black! transition-all ease-linear duration-300 flex items-center justify-between cursor-pointer"
                   variants={hoverScaleVariants}
                   whileHover="hover"
                 >

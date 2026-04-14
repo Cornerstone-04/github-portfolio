@@ -18,11 +18,11 @@ const Loader = ({ progress }) => {
       >
         <div className="border-2 border-white p-8">
           <div className="flex justify-between items-center mb-8">
-            <h1 className="text-2xl md:text-4xl font-light tracking-tight">
+            <h1 className="text-2xl md:text-4xl font-light tracking-tight text-white">
               CORNERSTONE
             </h1>
             <motion.h1
-              className="text-2xl md:text-4xl font-light"
+              className="text-2xl md:text-4xl font-light text-white"
               key={progress}
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}

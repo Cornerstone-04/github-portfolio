@@ -227,10 +227,11 @@ const Repository = () => {
                 <p className="text-base font-light text-text">Loading...</p>
               ) : latestCommit ? (
                 <div className="space-y-3 text-base font-light">
-                  <p>
-                    <span className="font-medium">Message:</span>{" "}
+                  <div className="bg-[#2a2a2a] border-l-2 border-white p-3 italic">
+                    <span className="text-white">"</span>
                     {latestCommit.commit.message}
-                  </p>
+                    <span className="text-white">"</span>
+                  </div>
                   <p>
                     <span className="font-medium">Author:</span>{" "}
                     {latestCommit.commit.author.name}

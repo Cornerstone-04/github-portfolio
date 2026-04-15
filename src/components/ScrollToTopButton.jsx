@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { BsArrowUp } from "react-icons/bs";
 
 const ScrollToTopButton = () => {
   const [visible, setVisible] = useState(false);
@@ -33,9 +34,9 @@ const ScrollToTopButton = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 12 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
-          className="fixed bottom-6 right-4 md:right-8 z-50 border border-[#5E5E5E] bg-dark px-4 py-3 text-sm text-white transition-colors duration-200 hover:border-white"
+          className="fixed bottom-6 right-4 md:right-8 z-50 border border-[#5E5E5E] bg-dark p-3 text-sm hover:bg-white text-white hover:text-black! transition-all ease-linear duration-300"
         >
-          ↑
+          <BsArrowUp className="h-6" />
         </motion.button>
       )}
     </AnimatePresence>

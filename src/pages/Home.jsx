@@ -1,5 +1,6 @@
 import { useForm, ValidationError } from "@formspree/react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { HeadImage, PageTransition } from "../components";
 import Layout from "../layout/Layout";
 import {
@@ -35,25 +36,37 @@ const Home = () => {
               <HeadImage />
             </motion.div>
             <motion.div
-              className="flex flex-col gap-20"
+              className="flex flex-col gap-8 md:gap-16"
               variants={itemVariants}
             >
               <motion.div variants={fadeInVariants}>
                 <p className="text-text text-xl md:text-[1.75rem] text-justify">
-                  As a seasoned frontend designer with two years of immersive
-                  experience, I pride myself on crafting visually stunning and
-                  highly functional user interfaces. With a keen eye for
-                  aesthetics and an intuitive understanding of user behavior, I
-                  specialize in translating design concepts into elegant,
-                  responsive, and performant web applications.
+                  As a frontend developer with over 3 years of experience, I
+                  pride myself in crafting visually stunning and highly
+                  functional user interfaces. This portfolio showcases my GitHub
+                  repositories and projects, providing a curated view of my work
+                  in frontend development, design systems, and creative
+                  applications.
                   <br />
                   <br />
                   Proficient in HTML, CSS, and JavaScript, along with popular
-                  frameworks and libraries such as ReactJS, NextJS, I am
-                  passionate about optimizing user journeys, enhancing
-                  accessibility, and improving load times to deliver seamless
-                  and engaging experiences.
+                  frameworks and libraries such as ReactJS and NextJS, I am
+                  passionate about building performant web applications,
+                  optimizing user journeys, enhancing accessibility, and
+                  delivering seamless and engaging digital experiences. Explore
+                  my repositories to see my latest projects and contributions.
                 </p>
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <Link to="/repositories">
+                  <motion.button
+                    className="px-6 py-3 border border-white text-white hover:bg-white hover:text-dark transition-all ease-linear duration-300 font-light"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    View My Repositories →
+                  </motion.button>
+                </Link>
               </motion.div>
               <motion.form
                 className="flex gap-6 w-full"
@@ -98,6 +111,59 @@ const Home = () => {
               </motion.form>
             </motion.div>
           </motion.section>
+          {/* <motion.section
+            className="flex flex-col gap-12"
+            variants={staggerContainer}
+            initial="initial"
+            animate="animate"
+          >
+            <motion.h2
+              variants={headingVariants}
+              className="font-light text-3xl md:text-4xl"
+            >
+              GitHub Activity
+            </motion.h2>
+
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              variants={staggerContainer}
+              initial="initial"
+              animate="animate"
+            >
+              <motion.div
+                variants={itemVariants}
+                className="overflow-hidden border border-white p-6 hover:border-white transition-all duration-300"
+              >
+                <img
+                  src="https://github-readme-stats.vercel.app/api/top-langs?username=Cornerstone-04&show_icons=true&locale=en&layout=compact&theme=dark&hide_border=true"
+                  alt="Top Languages"
+                  className="w-full h-auto"
+                />
+              </motion.div>
+
+              <motion.div
+                variants={itemVariants}
+                className="overflow-hidden border border-white p-6 hover:border-white transition-all duration-300"
+              >
+                <img
+                  src="https://github-readme-stats.vercel.app/api?username=Cornerstone-04&show_icons=true&locale=en&theme=dark&hide_border=true"
+                  alt="GitHub Stats"
+                  className="w-full h-auto"
+                />
+              </motion.div>
+
+              <motion.div
+                variants={itemVariants}
+                className="overflow-hidden border border-white p-6 hover:border-white transition-all duration-300"
+              >
+                <img
+                  src="https://github-readme-streak-stats.herokuapp.com/?user=Cornerstone-04&theme=dark&hide_border=true"
+                  alt="GitHub Streak"
+                  className="w-full h-auto"
+                />
+              </motion.div>
+            </motion.div>
+          </motion.section> */}
         </main>
       </PageTransition>
     </Layout>

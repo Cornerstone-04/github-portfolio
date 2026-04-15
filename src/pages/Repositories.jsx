@@ -9,7 +9,7 @@ import {
   staggerContainer,
   itemVariants,
 } from "../utils/animations";
-import { NavArrow } from "../assets/icons";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -153,18 +153,18 @@ const Repositories = () => {
 
           {!isLoading && !isError && totalPages > 1 && (
             <motion.div
-              className="flex flex-col gap-4"
+              className="flex flex-col items-center sm:items-start gap-4"
               variants={itemVariants}
               initial="initial"
               animate="animate"
             >
-              <div className="flex flex-wrap items-center gap-3">
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3">
                 <button
                   onClick={() => setCurrentPage((prev) => prev - 1)}
                   disabled={currentPage === 1}
-                  className="px-4 py-3 border border-[#5D5D5D] text-text disabled:opacity-40 disabled:cursor-not-allowed hover:border-white"
+                  className="px-4 py-3 border border-[#5D5D5D] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-white text-white hover:text-black! transition-all ease-linear duration-300"
                 >
-                  <NavArrow showCircle="false" className="w-4 h-4" />
+                  <BsArrowLeft />
                 </button>
 
                 {Array.from(
@@ -187,9 +187,9 @@ const Repositories = () => {
                 <button
                   onClick={() => setCurrentPage((prev) => prev + 1)}
                   disabled={currentPage === totalPages}
-                  className="px-4 py-3 border border-[#5D5D5D] text-text disabled:opacity-40 disabled:cursor-not-allowed hover:border-white"
+                  className="px-4 py-3 border border-white disabled:opacity-40 disabled:cursor-not-allowed hover:bg-white text-white hover:text-black! transition-all ease-linear duration-300"
                 >
-                  <NavArrow showCircle="false" className="w-4 h-4 rotate-180" />
+                  <BsArrowRight />
                 </button>
               </div>
 

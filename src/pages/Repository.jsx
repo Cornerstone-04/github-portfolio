@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import Layout from "../layout/Layout";
@@ -19,6 +20,7 @@ import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 const Repository = () => {
   const { repoName } = useParams();
   const navigate = useNavigate();
+  const [ownerImageLoaded, setOwnerImageLoaded] = useState(false);
 
   const {
     data: repo,
@@ -107,11 +109,19 @@ const Repository = () => {
                 className="border border-white p-6"
                 variants={itemVariants}
               >
-                <img
-                  src={repo?.owner?.avatar_url}
-                  alt={repo?.owner?.login}
-                  className="w-full h-auto mb-4 border border-white"
-                />
+                <div className="w-full mb-4 border border-white bg-[#2a2a2a] relative overflow-hidden">
+                  {!ownerImageLoaded && (
+                    <div className="absolute inset-0 animate-pulse bg-linear-to-r from-[#2a2a2a] via-[#3a3a3a] to-[#2a2a2a]" />
+                  )}
+                  <img
+                    src={repo?.owner?.avatar_url}
+                    alt={repo?.owner?.login}
+                    onLoad={() => setOwnerImageLoaded(true)}
+                    className={`w-full h-auto transition-opacity duration-300 ${
+                      ownerImageLoaded ? "opacity-100" : "opacity-0"
+                    }`}
+                  />
+                </div>
                 <p className="text-text font-medium text-base">
                   <span className="font-bold">Owner:</span> {repo?.owner?.login}
                 </p>

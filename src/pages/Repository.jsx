@@ -2,8 +2,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import Layout from "../layout/Layout";
 import { PageTransition } from "../components";
-import { NavArrow } from "../assets/icons";
-import { useRepositoryCommitsQuery, useRepositoryQuery } from "../hooks";
+import {
+  useRepositoryCommitsQuery,
+  useRepositoryQuery,
+  useLatestCommitQuery,
+} from "../hooks";
 import {
   headingVariants,
   itemVariants,
@@ -11,6 +14,7 @@ import {
   fadeInVariants,
   hoverScaleVariants,
 } from "../utils/animations";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 const Repository = () => {
   const { repoName } = useParams();
@@ -25,6 +29,9 @@ const Repository = () => {
 
   const { data: commits = [], isLoading: commitsLoading } =
     useRepositoryCommitsQuery(repoName);
+
+  const { data: latestCommit, isLoading: latestCommitLoading } =
+    useLatestCommitQuery(repoName);
 
   if (repoLoading) {
     return (
@@ -59,14 +66,14 @@ const Repository = () => {
         <main className="px-6 md:px-14 my-16 md:my-24 flex flex-col gap-12">
           <motion.button
             onClick={() => navigate("/repositories")}
-            className="flex items-center gap-3 text-text hover:text-white transition-all ease-linear w-fit border border-white p-3"
-            variants={itemVariants}
+            className="w-fit border border-white py-3 px-6 hover:bg-white text-white hover:text-black! transition-all ease-linear duration-300 items-center justify-between cursor-pointer flex gap-3 md:gap-6"
+            variants={hoverScaleVariants}
+            whileHover="hover"
             initial="initial"
             animate="animate"
-            whileHover="hover"
             whileTap="tap"
           >
-            <NavArrow className="w-5 h-5" />
+            <BsArrowLeft className="w-5" />
             <span>Back to Repositories</span>
           </motion.button>
 
@@ -198,6 +205,39 @@ const Repository = () => {
             </motion.div>
 
             <motion.div
+              className="border border-white p-6 mb-8"
+              variants={staggerContainer}
+              initial="initial"
+              animate="animate"
+            >
+              <p className="text-sm text-text font-medium mb-2">
+                Latest Commit
+              </p>
+              {latestCommitLoading ? (
+                <p className="text-base font-light text-text">Loading...</p>
+              ) : latestCommit ? (
+                <div className="space-y-3 text-base font-light">
+                  <p>
+                    <span className="font-medium">Message:</span>{" "}
+                    {latestCommit.commit.message}
+                  </p>
+                  <p>
+                    <span className="font-medium">Author:</span>{" "}
+                    {latestCommit.commit.author.name}
+                  </p>
+                  <p>
+                    <span className="font-medium">Date:</span>{" "}
+                    {new Date(latestCommit.commit.author.date).toDateString()}
+                  </p>
+                </div>
+              ) : (
+                <p className="text-base font-light text-text">
+                  No commits available
+                </p>
+              )}
+            </motion.div>
+
+            <motion.div
               className="grid grid-cols-1 md:grid-cols-2 gap-6"
               variants={staggerContainer}
               initial="initial"
@@ -214,7 +254,7 @@ const Repository = () => {
                 <span className="text-base md:text-lg font-light">
                   View on GitHub
                 </span>
-                <span className="text-xl">→</span>
+                <BsArrowRight className="w-5" />
               </motion.a>
 
               {repo?.homepage ? (
@@ -229,7 +269,7 @@ const Repository = () => {
                   <span className="text-base md:text-lg font-light">
                     Live Preview
                   </span>
-                  <span className="text-xl">→</span>
+                  <BsArrowRight className="w-5" />
                 </motion.a>
               ) : (
                 <motion.div

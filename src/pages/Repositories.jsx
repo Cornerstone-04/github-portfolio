@@ -2,8 +2,8 @@ import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import Layout from "../layout/Layout";
 import { RepoCard, PageTransition } from "../components";
-import { GithubLogo } from "../assets/images";
 import { useRepositoriesQuery } from "../hooks";
+import { getRepoSpaceImageUrl } from "../utils/imageUtils";
 import {
   headingVariants,
   staggerContainer,
@@ -134,9 +134,10 @@ const Repositories = () => {
                   <RepoCard
                     name={repo.name}
                     link={`/repositories/${repo.name}`}
-                    img={GithubLogo}
+                    img={getRepoSpaceImageUrl(repo.name)}
                     desc={repo.description || "No description"}
                     watch={repo.watchers_count}
+                    stars={repo.stargazers_count}
                   />
                 </motion.div>
               ))

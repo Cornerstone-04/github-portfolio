@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import ImageSkeleton from "./ImageSkeleton";
 import { hoverScaleVariants } from "../utils/animations";
 
-const RepoCard = ({ link, img, name, desc, watch }) => {
+const RepoCard = ({ link, img, name, desc, watch, stars }) => {
   return (
     <motion.div
       variants={hoverScaleVariants}
@@ -15,15 +15,22 @@ const RepoCard = ({ link, img, name, desc, watch }) => {
         <ImageSkeleton
           src={img}
           alt={name}
-          className="h-96 md:h-112 w-full border border-white"
+          className="h-96 md:h-112 w-full border border-white invert-100"
         />
         <h2 className="text-lg md:text-2xl font-medium capitalize">{name}</h2>
         <p className="text-base overflow-ellipsis text-text line-clamp-2">
           {desc}
         </p>
-        <p className="text-[#D3D3D3] font-medium text-base">
-          {watch}&nbsp;watcher(s)
-        </p>
+        <div className="flex justify-between">
+          <p className="text-[#D3D3D3] font-medium text-base">
+            {watch}&nbsp;watcher(s)
+          </p>
+          {stars !== undefined && (
+            <p className="text-[#D3D3D3] font-medium text-base">
+              {stars}&nbsp;star(s)
+            </p>
+          )}
+        </div>
       </Link>
     </motion.div>
   );
@@ -35,6 +42,7 @@ RepoCard.propTypes = {
   name: PropTypes.string.isRequired,
   desc: PropTypes.string.isRequired,
   watch: PropTypes.number.isRequired,
+  stars: PropTypes.number,
 };
 
 export default RepoCard;

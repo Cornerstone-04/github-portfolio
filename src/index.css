@@ -2,42 +2,70 @@
 @config "../tailwind.config.js";
 
 @font-face {
-    font-family: "Clash Display";
-    src:
-        local("Clash Display"),
-        url("./assets/fonts/ClashDisplay-Regular.otf") format("opentype");
+  font-family: "Clash Display";
+  src:
+    local("Clash Display"),
+    url("./assets/fonts/ClashDisplay-Regular.otf") format("opentype");
 }
 
 html,
 body {
-    @apply bg-dark w-full box-border min-h-screen m-0 p-0 font-clash bg-fixed;
-    background-image: url("./assets/images/noise.png");
+  @apply bg-dark w-full box-border min-h-screen m-0 p-0 font-clash bg-fixed;
+  background-image: url("./assets/images/noise.png");
 }
 a,
 button {
-    @apply outline-none no-underline cursor-pointer;
+  @apply outline-none no-underline cursor-pointer;
 }
 
 a {
-    outline: none;
-    @apply hover:text-white transition-all ease-linear;
+  outline: none;
+  @apply hover:text-white transition-all ease-linear;
 }
 
 #bent_text span {
-    position: absolute;
-    left: 50%;
-    transform-origin: 0 85px;
-    font-size: 1.25rem;
+  position: absolute;
+  left: 50%;
+  transform-origin: 0 85px;
+  font-size: 1.25rem;
 }
 
 .slick-slider button.slick-arrow {
-    display: none !important;
+  display: none !important;
 }
 
 .header_image {
-    background-image: url("./assets/images/Cornerstone.jpg");
+  background-image: url("./assets/images/Cornerstone.jpg");
+}
+
+/* Custom Scrollbar */
+/* Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ffffff;
+  border-radius: 6px;
+  border: 3px solid #1a1a1a;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e0e0e0;
+}
+
+/* Firefox */
+* {
+  scrollbar-color: #ffffff #1a1a1a;
+  scrollbar-width: thin;
 }
 
 textarea::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
